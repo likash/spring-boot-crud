@@ -1,6 +1,7 @@
 package com.example.vintageshop.services;
 
 import com.example.vintageshop.entities.Item;
+import com.example.vintageshop.exceptions.ItemNotFoundException;
 import com.example.vintageshop.repositories.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ public class ItemService {
     private ItemRepository repository;
 
     public Item getItem(Long id) {
-        return repository.findById(id).orElse(null);
+        return repository.findById(id).orElseThrow(() -> new ItemNotFoundException(id));
     }
 
     public Item save(Item item) {
@@ -30,9 +31,6 @@ public class ItemService {
                     employee.setDescription(newItem.getDescription());
                     return repository.save(employee);
                 })
-                .orElseGet(() -> {
-                    newItem.setId(itemId);
-                    return repository.save(newItem);
-                });
+                .orElseThrow(() -> new ItemNotFoundException(itemId));
     }
 }

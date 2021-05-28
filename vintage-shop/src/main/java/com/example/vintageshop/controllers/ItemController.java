@@ -12,22 +12,22 @@ public class ItemController {
     @Autowired
     private ItemService service;
 
-    @RequestMapping(value="/{itemId}", method = RequestMethod.GET)
+    @GetMapping(value="/{itemId}")
     public Item getItem(@PathVariable("itemId") Long itemId) {
         return service.getItem(itemId);
     }
 
-    @RequestMapping(value="/{itemId}", method = RequestMethod.PUT)
+    @PutMapping(value="/{itemId}")
     public Item updateItem(@RequestBody Item newItem, @PathVariable("itemId") Long itemId) {
         return service.updateItem(newItem, itemId);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public Item saveItem(@RequestBody Item item) {
         return service.save(item);
     }
 
-    @RequestMapping(value="{itemId}", method = RequestMethod.DELETE)
+    @DeleteMapping(value="{itemId}")
     public void deleteItem(@PathVariable("itemId") Long itemId) {
         service.deleteItem(itemId);
     }
