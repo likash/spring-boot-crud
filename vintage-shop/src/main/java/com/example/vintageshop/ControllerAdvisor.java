@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ItemNotFoundException.class)
-    public ResponseEntity<Object> handleCityNotFoundException(ItemNotFoundException ex) {
+    public ResponseEntity<Object> handleItemNotFoundException(ItemNotFoundException ex) {
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
